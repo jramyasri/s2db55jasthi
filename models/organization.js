@@ -4,5 +4,4 @@ name: String,
 type: String,
 noofbranches: Number
 })
-module.exports = mongoose.model("organization",
-organizationSchema)
+module.exports = mongoose.model("organization", organizationSchema)

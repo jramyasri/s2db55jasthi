@@ -17,7 +17,6 @@
   },
   "description": "Assignment 10\r Class - organization class organization{ constructor(organization_type, organization_name, noofbranches){\r     this.name = name;\r     this.type = type;\r     this.branches = branches;\r     }\r     }",
   "main": "app.js",
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jramyasri/s2db55jasthi.git"

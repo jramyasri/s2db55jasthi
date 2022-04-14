@@ -4,11 +4,20 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const connectionString =  
+process.env.MONGO_CON 
+mongoose = require('mongoose'); 
+mongoose.connect(connectionString,  
+{useNewUrlParser: true, 
+useUnifiedTopology: true}); 
+
+var organization = require('./models/organization');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var organizationRouter = require('./routes/organization');
 var addmodsRouter = require('./routes/addmods');
 var selectorRouter = require('./routes/selector');
+var resourceRouter = require('./routes/resource');
 
 
 
@@ -24,11 +33,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+ 
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/organization', organizationRouter);
 app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
+app.use('/resource', resourceRouter);
 
 
 
@@ -37,6 +49,8 @@ app.use('/selector', selectorRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -50,3 +64,38 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+// We can seed the collection if needed on server start
+async function recreateDB() {
+  // Delete everything in Zodiac
+    await organization.deleteMany();
+  
+    let instance1 = new organization({ name: "Apollo", type: 'Hospital', noofbranches:50 });
+    instance1.save(function (err, doc) {
+      if (err) return console.error(err);
+      console.log("First organization saved")
+    });
+  
+    let instance2 = new organization({ name: "saint luke", type: "private", noofbranches:100 });
+    instance2.save(function (err, doc) {
+      if (err) return console.error(err);
+      console.log("Second organization saved")
+    });
+  
+    let instance3 = new organization({ name: "usaa", type: "public", noofbranches:100 });
+    instance3.save(function (err, doc) {
+      if (err) return console.error(err);
+      console.log("Third organization saved")
+    });
+  }
+
+  let reseed = true;
+  if (reseed) { recreateDB(); }
+
+//Get the default connection 
+var db = mongoose.connection; 
+ 
+//Bind connection to error event  
+db.on('error', console.error.bind(console, 'MongoDB connection error:')); 
+db.once("open", function(){ 
+console.log("Connection to DB succeeded")});

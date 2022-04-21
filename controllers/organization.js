@@ -149,6 +149,6 @@ result });
     } 
     catch(err){ 
         res.status(500) 
-        res.send(`{'error': '${err}'}`); 
+        res.send(`{'error': '${err}'}`);
     } 
 }; 

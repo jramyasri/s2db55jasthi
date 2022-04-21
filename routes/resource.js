@@ -26,6 +26,6 @@ router.get('/detail', organization_controller.organization_view_one_Page);
 router.get('/create', organization_controller.organization_create_Page); 
 /* GET create update page */ 
 router.get('/update', organization_controller.organization_update_Page);
-/* GET delete costume page */ 
+/* GET delete organization page */ 
 router.get('/delete', organization_controller.organization_delete_Page); 
 module.exports = router;

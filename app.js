@@ -90,7 +90,7 @@ async function recreateDB() {
   }
 
   let reseed = true;
-  if (reseed) { recreateDB(); }
+  //if (reseed) { recreateDB(); }
 
 //Get the default connection 
 var db = mongoose.connection; 

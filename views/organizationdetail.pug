@@ -1,0 +1,21 @@
+extends layout 
+ 
+block content 
+    h1= title 
+    - let organizationid = toShow._id 
+    - let name = toShow.name 
+    - let type = toShow.type
+    - let noofbranches = toShow.noofbranches 
+      div 
+        div.row 
+            div(class='organizationAttr mr-3') organization ID is: 
+            div #{organizationid} 
+        div.row 
+            div(class='organizationAttr mr-3') organization name is: 
+            div #{name} 
+        div.row 
+            div(class='organizationAttr mr-3') organization type is: 
+            div #{type} 
+        div.row 
+          div(class='organizationAttr mr-3') organization noofbranches is: 
+          div #{noofbranches} 

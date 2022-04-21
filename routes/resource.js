@@ -17,7 +17,15 @@ router.delete('/organization/:id', organization_controller.organization_delete )
 // PUT request to update organization.
 router.put('/organization/:id', organization_controller.organization_update_put);
 // GET request for one organization.
-router.get('/organization/:id', organization_controller.organization_info);
+router.get('/organization/:id', organization_controller.organization_detail);
 // GET request for list of all organizations.
 router.get('/organization', organization_controller.organization_list);
+// GET detail organization page // 
+router.get('/detail', organization_controller.organization_view_one_Page);
+/* GET create organization page */ 
+router.get('/create', organization_controller.organization_create_Page); 
+/* GET create update page */ 
+router.get('/update', organization_controller.organization_update_Page);
+/* GET delete costume page */ 
+router.get('/delete', organization_controller.organization_delete_Page); 
 module.exports = router;

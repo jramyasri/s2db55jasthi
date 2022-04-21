@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1= title
-  - let organizations = [{name:"Apollo", type:"Hospital", noofbranches: 50},{name:"saint luke", type:"private", noofbranches: 100},{name:"usaa", type:"public", noofbranches: 100}]
+  - organizations = results
   div(class="container-fluid") 
    div(class="row")
     each organization,index in organizations 

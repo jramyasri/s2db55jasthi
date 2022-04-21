@@ -1,9 +1,9 @@
 var express = require('express');
+const organization_controller=require('../controllers/organization')
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('organization', { title: 'Search Results organization' });
-});
+router.get('/', organization_controller.organization_view_all);
+
 
 module.exports = router;

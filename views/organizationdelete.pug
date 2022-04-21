@@ -1,0 +1,40 @@
+extends layout
+block content
+  h1= title
+  - let organizationid = toShow._id
+  - let name = toShow.name
+  - let type = toShow.type
+  - let noofbranches = toShow.noofbranches
+  div.row(class='mb-2')
+  div.mr-1 ID is
+  div #{organizationid}
+  - let actionid = "/resource/organization/" + organizationid
+  form(id='organizationForm', action= actionid, method="DELETE")
+    div.form-group
+      label.organizationAttr(for='name') organization name
+      input#name(type='text', name='name', value= name )
+    div.form-group
+      label.organizationAttr(for='type') organization type
+      input#type(type='text', name='type', value= type )
+    div.form-group
+      label.organizationAttr(for='noofbranches') noofbranches
+      input#noofbranches(type='number', name='noofbranches', value= noofbranches )
+      input(type="submit")
+  script.
+    document.forms['organizationForm'].addEventListener('submit', (event) => {
+    event.preventDefault();
+    // TODO do something here to show user that form is being submitted
+    fetch(event.target.action, {
+    method: 'DELETE',
+    body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+    }).then((resp) => {
+    return resp.json(); // or resp.text() or whatever the server sends
+    }).then((body) => {
+    alert("Delete succeded")
+    // TODO handle body
+    }).catch((error) => {
+    // TODO handle error
+    alert("Update failed " + error )
+    });
+    });
+    

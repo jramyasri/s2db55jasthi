@@ -1,0 +1,31 @@
+extends layout
+block content
+  h1= title
+  form(id='organizationForm', action="/resource/organizations", method="POST")
+    div.form-group
+      label.organizationAttr(for='organization_name') organization name
+      input#organization_name(type='text', name='organization_name')
+    div.form-group
+      label.organizationAttr(for='type') organization type
+      input#type(type='text', name='type')
+    div.form-group
+      label.organizationAttr(for='noofbranches') organization noofbranches
+      input#noofbranches(type='number', name='noofbranches')
+    input(type="submit")
+  script.
+    document.forms['organizationForm'].addEventListener('submit', (event) => {
+    event.preventDefault();
+    // TODO do something here to show user that form is being submitted
+    fetch(event.target.action, {
+    method: 'POST',
+    body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+    }).then((resp) => {
+    return resp.json(); // or resp.text() or whatever the server sends
+    }).then((body) => {
+    alert("Save succeded")
+    // TODO handle body
+    }).catch((error) => {
+    // TODO handle error
+    alert("Save failed " + error )
+    });
+    });

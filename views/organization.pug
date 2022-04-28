@@ -1,15 +1,26 @@
 extends layout
 
 block content
+  - let destination = `dispatch(\"/resource/create\")`
+  button.btn( class="btn-primary ml-1", onclick= destination_create) create organization
   h1= title
   - organizations = results
-  div(class="container-fluid") 
-   div(class="row")
-    each organization,index in organizations 
+    div(class="container-fluid") 
+    div(class="row m-1")
+      each organization,index in organizations 
+        - let destination = `dispatch(\"/resource/update?id=${organization._id}\")`
+        - let destination_detail = `dispatch(\"/resource/detail?id=${organization._id}\")`
+        - let destination_delete = `dispatch(\"/resource/delete?id=${organization._id}\")`
         div(class="col-sm-2" onclick=`buy(${index+1})`) name: #{organization.name} , type: #{organization.type} , noofbranches: #{organization.noofbranches}
-          
-    script. 
-     function buy(index)
-     {
-        alert(`You purchased Item ${index}`);
+          button.btn( class="btn-primary ml-1", onclick= destination) Update
+          button.btn( class="btn-primary ml-1", onclick= destination_detail) Detail
+          button.btn( class="btn-primary ml-1", onclick= destination_delete) Delete
+  script. 
+    function buy(index)
+    {
+         alert(`You purchased Item ${index}`);
      }
+     function dispatch(path){ 
+     window.location.href=path 
+     } 
+ 
